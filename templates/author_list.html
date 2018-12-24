@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block author_list%}
+    active
+{% endblock %}
+{% block ojbk %}
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header ">作者管理页面</h1>
+
+            <div class="panel panel-primary">
+                <!-- Default panel contents -->
+                <div class="panel-heading">作者列表 <i class="fa fa-thumb-tack pull-right"></i></div>
+                <div class="panel-body">
+                    <div class="row" style="margin-bottom: 15px">
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search for...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">搜索</button>
+                                </span>
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-md-4 -->
+                        <div class="col-md-3 pull-right">
+{#                            <a href="/add_author/" class="btn btn-success pull-right">新页面添加</a>#}
+                            <button class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">新增
+                            </button>
+                        </div>
+
+                    </div><!-- /.row -->
+
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>名字</th>
+                            <th>作品</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for author in author_list %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ author.id }}</td>
+                                <td>{{ author.name }}</td>
+                                {% for book in author.book.all %}
+                                <td class="btn btn-success " style="margin: 7px 2px 7px 2px">{{ book.title }}&nbsp;</td>
+                                {% endfor %}
+                                <td>
+                                    <a class="btn btn-danger" href="/delete_author/?id={{ author.id }}">删除</a>
+                                    <a class="btn btn-info" href="/edit_author/?id={{ author.id }}">编辑</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <nav aria-label="Page navigation" class="text-right">
+                        <ul class="pagination">
+                            <li>
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li>
+                                <a href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+{% endblock %}
+{% block js_page %}
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">添加作者</h4>
+            </div>
+            <div class="modal-body">
+                <form action="/add_author/" method="post" class="form-horizontal">
+                    <div class="form-group">
+                        <label  class="col-sm-2 control-label">作者姓名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="author_name" placeholder="作者姓名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">作品</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" multiple name="books">
+                                {% for book in book_list %}
+                                   <option value="{{ book.id }}">{{ book.title }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-primary">提交</button>
+                    </div>
+                 </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+{% endblock %}
+
