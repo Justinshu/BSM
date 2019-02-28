@@ -1,1 +1,9 @@
 theme: jekyll-theme-merlot
+title: Justin Blog
+SEOTitle: 舒超的博客 | JUSTIN Blog
+header-img: img/home-bg.jpg
+email: Justinshu@gmail.com
+description: "关于程序与设计、黑客 | 舒超，Web & Mobile Lover，Python Engineer| 这里是 @justinshu 舒超 的个人博客，与你一起发现更大的世界。"
+keyword: "舒超， @Justin, 舒超的博客, Justinshu Blog, 博客, 个人网站, 互联网, Python, Web, JavaScript, 后端"
+url: "https://justinshu.github.io"              # your host, for absolute URL
+baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
